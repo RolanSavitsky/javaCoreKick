@@ -4,6 +4,33 @@ import com.hopik.task1.entity.CustomArrayWrapper;
 import com.hopik.task1.service.SortService;
 
 public class SortServiceImpl implements SortService {
+
+    @Override
+    public void quickSort(CustomArrayWrapper array, int left, int right) {
+
+        if (left < right) {
+            int border = partition(array, left, right);
+            quickSort(array, left, border - 1);
+            quickSort(array, border + 1, right);
+        }
+    }
+
+    @Override
+    public void selectionSort(CustomArrayWrapper array) {
+
+        for (int i = 0; i < array.getSize(); ++i) {
+            int min = i;
+
+            for (int j = i + 1; j < array.getSize(); ++j) {
+
+                if (array.getElement(j) < array.getElement(min)) {
+                    min = j;
+                }
+            }
+            swap(array, i, min);
+        }
+    }
+
     private void swap(CustomArrayWrapper array, int i, int j) {
         int temp = array.getElement(i);
         array.setElement(i, array.getElement(j));
@@ -23,39 +50,13 @@ public class SortServiceImpl implements SortService {
 
             do {
                 --j;
-            } while (array.getElement(j) < pivot);
+            } while (array.getElement(j) > pivot);
 
             if (i >= j) {
                 return j;
             }
 
             swap(array, i, j);
-        }
-    }
-
-    @Override
-    public void quickSort(CustomArrayWrapper array, int left, int right) {
-
-        if (left < right) {
-            int border = partition(array, left, right);
-            quickSort(array, left, border);
-            quickSort(array, border + 1, right);
-        }
-    }
-
-    @Override
-    public void selectionSort(CustomArrayWrapper array) {
-
-        for (int i = 0; i < array.getSize(); ++i) {
-            int min = i;
-
-            for (int j = 0; j < array.getSize(); ++j) {
-
-                if (array.getElement(j) < array.getElement(min)) {
-                    min = j;
-                }
-            }
-            swap(array, i, min);
         }
     }
 }

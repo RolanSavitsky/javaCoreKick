@@ -65,6 +65,6 @@ public class ArrayServiceTest {
 
         sortService.selectionSort(customArrayWrapper);
 
-        assertArrayEquals(expectedSorted, customArrayWrapper.getElements());
+            assertArrayEquals(expectedSorted, customArrayWrapper.getElements());
     }
 }
