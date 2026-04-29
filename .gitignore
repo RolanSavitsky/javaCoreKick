@@ -42,5 +42,8 @@ bin/
 ### Mac OS ###
 .DS_Store
 
+# Gradle wrapper directory
+gradle/wrapper/
+
 .idea/
 .gradle/

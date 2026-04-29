@@ -10,6 +10,8 @@ import com.hopik.task1.service.SumService;
 import com.hopik.task1.service.impl.AverageServiceImpl;
 import com.hopik.task1.service.impl.MinMaxServiceImpl;
 import com.hopik.task1.service.impl.SumServiceImpl;
+import com.hopik.task1.warehouse.ArrayWarehouse;
+import com.hopik.task1.warehouse.impl.ArrayWarehouseImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +26,7 @@ public class ArrayObserverImpl implements ArrayObserver {
         MinMaxService minMaxService = new MinMaxServiceImpl();
         SumService sumService = new SumServiceImpl();
         AverageService averageService = new AverageServiceImpl();
+        ArrayWarehouse warehouse = ArrayWarehouseImpl.getInstance() ;
 
         int min = minMaxService.calculateMin(source).orElse(0);
         int max = minMaxService.calculateMax(source).orElse(0);
@@ -31,5 +34,7 @@ public class ArrayObserverImpl implements ArrayObserver {
         double average = averageService.calculateAverage(source).orElse(0.0);
 
         ArrayMetrics arrayMetrics = new ArrayMetrics(min, max, sum, average);
+
+        warehouse.put(source.getId(), arrayMetrics);
     }
 }
